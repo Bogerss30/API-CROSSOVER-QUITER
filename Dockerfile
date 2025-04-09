@@ -28,4 +28,5 @@ COPY . /app/
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación, usando el nombre correcto del archivo
-CMD ["python", "API-Crossover-Quiter.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "API-Crossover-Quiter:app"]
+
