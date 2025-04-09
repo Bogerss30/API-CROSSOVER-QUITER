@@ -28,5 +28,6 @@ COPY . /app/
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación, usando el nombre correcto del archivo
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "API-Crossover-Quiter:app"]
+EXPOSE 10000
+CMD ["gunicorn", "-b", "0.0.0.0:10000", "API-Crossover-Quiter:app"]
 
