@@ -27,5 +27,5 @@ COPY . /app/
 # Exponemos el puerto que utilizará nuestra aplicación (5000 por defecto)
 EXPOSE 5000
 
-# Comando para ejecutar la aplicación, ahora usando el nombre correcto del archivo
+# Comando para ejecutar la aplicación, usando el nombre correcto del archivo
 CMD ["python", "API-Crossover-Quiter.py"]
