@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import pyodbc
 from decimal import Decimal
+import os
 
 app = Flask(__name__)
 
@@ -97,5 +98,7 @@ def search_by_oem():
     except Exception as e:
         return jsonify({'error': f'Error inesperado: {str(e)}'}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Bloque para ejecutar la aplicación en producción
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Usa el puerto proporcionado por el entorno o 5000 por defecto
+    app.run(host="0.0.0.0", port=port, debug=True)
