@@ -100,5 +100,5 @@ def search_by_oem():
 
 # Bloque para ejecutar la aplicación en producción
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Usa el puerto proporcionado por el entorno o 5000 por defecto
+    port = int(os.environ.get("PORT", 10000))  # Puerto por defecto cambiado a 10000
     app.run(host="0.0.0.0", port=port, debug=True)

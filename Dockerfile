@@ -15,19 +15,17 @@ RUN apt-get update && apt-get install -y \
 # Establecemos el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copiamos el archivo requirements.txt a nuestro contenedor
+# Copiamos el archivo requirements.txt al contenedor
 COPY requirements.txt /app/
 
 # Instalamos las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos todo el código de la API al contenedor
+# Copiamos el resto del código fuente
 COPY . /app/
 
-# Exponemos el puerto que utilizará nuestra aplicación (5000 por defecto)
-EXPOSE 5000
-
-# Comando para ejecutar la aplicación, usando el nombre correcto del archivo
+# Exponemos el puerto 10000
 EXPOSE 10000
-CMD ["gunicorn", "-b", "0.0.0.0:10000", "API-Crossover-Quiter:app"]
 
+# Comando para ejecutar la aplicación
+CMD ["python", "API-Crossover-Quiter.py"]
