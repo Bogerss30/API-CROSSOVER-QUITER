@@ -51,6 +51,10 @@ def get_disponibilidad(stock):
 def get_tipo_producto(sku):
     return "Alternativo" if sku.startswith("0/") and sku.endswith("B") else "Original"
 
+@app.route('/')
+def home():
+    return '¡La API está viva y funcionando! 🚀'
+
 # Endpoint para buscar artículos por OEM
 @app.route('/api/search', methods=['GET'])
 def search_by_oem():
