@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Configura la conexión a la base de datos SQL Server
 def connect_to_db():
     SQL_driver = '{ODBC Driver 17 for SQL Server}'
-    SQL_server = r'192.168.50.169\Datahouse,1433'
+    SQL_server = '186.67.132.154'
     SQL_database = 'Piamonte_Quiter'
     SQL_username = 'piaQuiter'
     SQL_password = 'piaQuiter'
