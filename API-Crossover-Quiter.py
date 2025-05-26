@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Configura la conexión a la base de datos SQL Server
 def connect_to_db():
     SQL_driver = '{ODBC Driver 17 for SQL Server}'
-    SQL_server = r'192.168.50.169\Datahouse,1433'
+    SQL_server = '186.67.132.154'
     SQL_database = 'Piamonte_Quiter'
     SQL_username = 'piaQuiter'
     SQL_password = 'piaQuiter'
@@ -108,6 +108,6 @@ def search_by_oem():
         return jsonify({'error': f'Error inesperado: {str(e)}'}), 500
 
 # Bloque para ejecutar la aplicación en producción
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Puerto por defecto cambiado a 10000
-    app.run(host="0.0.0.0", port=port, debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8080))  # Railway asigna este valor automáticamente
+    app.run(host='0.0.0.0', port=port, debug=True)
