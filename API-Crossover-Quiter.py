@@ -33,8 +33,8 @@ def format_precio(precio):
 # Función para calcular el precio con IVA y descuento
 def calcular_precio_con_descuento(precio):
     if precio is None:
-        return 0  # O algún valor por defecto
-    precio = Decimal(precio)  # Convertir a Decimal para evitar errores
+        return 0
+    precio = Decimal(precio)
     precio_con_iva = precio * (1 + IVA_RATE)
     precio_final = precio_con_iva * (1 - DISCOUNT_RATE)
     return format_precio(precio_final)
@@ -55,12 +55,17 @@ def get_tipo_producto(sku):
 def home():
     return '¡La API está viva y funcionando! 🚀'
 
-# Endpoint para buscar artículos por OEM
+# Endpoint para buscar artículos por OEM sin necesidad de incluir "/"
 @app.route('/api/search', methods=['GET'])
 def search_by_oem():
     oem = request.args.get('oem')
     if not oem:
         return jsonify({'error': 'El parámetro "oem" es obligatorio'}), 400
+
+    # Normaliza el OEM: elimina "/", asegura que empieza con "0"
+    oem = oem.replace('/', '')
+    if not oem.startswith('0'):
+        oem = '0' + oem
 
     try:
         conn = connect_to_db()
@@ -69,9 +74,9 @@ def search_by_oem():
         query = """
         SELECT Des_Articulo, Articulo, Existencias, PVP, Almacen
         FROM FHMABI_PR
-        WHERE Articulo LIKE ?
+        WHERE REPLACE(Articulo, '/', '') LIKE ?
         """
-        cursor.execute(query, (oem + '%',))  # Busca coincidencias parciales
+        cursor.execute(query, (oem + '%',))
         rows = cursor.fetchall()
 
         if not rows:
